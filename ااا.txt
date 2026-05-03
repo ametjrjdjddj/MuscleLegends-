@@ -1,0 +1,114 @@
+game.Players.LocalPlayer.Character.Humanoid.Health = 0
+wait(0.1)
+game.StarterGui:SetCore("SendNotification", {
+    Title = "ALFA ";
+    Text = "-لـقـد تـم الـتـفـعـيل-"; -- ARAB TEAM
+    Duration = 5;
+})
+local args = {
+    [1] = "RolePlayName",
+    [2] = "-سـڪربـت آلـفـا v1.1-"
+}
+
+game:GetService("ReplicatedStorage").RE:FindFirstChild("1RPNam1eTex1t"):FireServer(unpack(args))
+wait(0.1)
+local args = {
+    [1] = "RolePlayBio",
+    [2] = "-سـكربـت الـمـطور آلـفـا-"}
+
+game:GetService("ReplicatedStorage").RE:FindFirstChild("1RPNam1eTex1t"):FireServer(unpack(args))
+wait(0.5)
+game.StarterGui:SetCore("SendNotification", {
+    Title = "-تـم تـطـويـر الـسـكربـت مـن قبـل آلـفـا- ";
+    Text = "-تـيـك  @آلفا- "; -- ARAB TEAM
+    Duration = 5;
+})
+
+loadstring(game:HttpGet(("https://raw.githubusercontent.com/Martin19087/Martin/refs/heads/main/U")))()
+MakeWindow({
+  Hub = {
+    Title = "SCRIPT ALFA V1.1",
+    Animation = "SCRPIT ALFA V1.1 "
+  },
+  Key = {
+    KeySystem = false,
+    Title = "Key System",
+    Description = "",
+    KeyLink = "",
+    Keys = {"1234"},
+    Notifi = {
+      Notifications = true,
+      CorrectKey = "Running the Script...",
+      Incorrectkey = "The key is incorrect",
+      CopyKeyLink = "Copied to Clipboard"
+    }
+  }
+})
+
+MinimizeButton({
+  Image = "rbxassetid://118236235426347",
+  Size = {40, 40},
+  Color = Color3.fromRGB(10, 10, 10),
+  Corner = true,
+  Stroke = true,
+  StrokeColor = Color3.fromRGB(10, 10, 10)
+})
+
+local Main = MakeTab({Name = "- لعنه-"})
+
+
+local Players = game:GetService("Players")
+local selectedPlayer = nil
+
+local playerDropdown = AddDropdown(Main, {
+    Name = "اختار لاعب",
+    Options = {},
+    Callback = function(v)
+        selectedPlayer = Players:FindFirstChild(v)
+    end
+})
+
+local function updateList()
+    local list = {}
+    for _, p in pairs(Players:GetPlayers()) do
+        if p ~= Players.LocalPlayer then
+            table.insert(list, p.Name)
+        end
+    end
+    UpdateDropdown(playerDropdown, list)
+end
+
+Players.PlayerAdded:Connect(updateList)
+Players.PlayerRemoving:Connect(updateList)
+updateList()
+
+
+
+AddButton(Main, {
+    Name = "تفجير بمكان اللاعب",
+    Callback = function()
+        if selectedPlayer and selectedPlayer.Character and selectedPlayer.Character:FindFirstChild("HumanoidRootPart") then
+            local pos = selectedPlayer.Character.HumanoidRootPart.Position
+
+            local explosion = Instance.new("Explosion")
+            explosion.Position = pos
+            explosion.BlastRadius = 10
+            explosion.BlastPressure = 0
+            explosion.Visible = true
+            explosion.Parent = workspace
+
+            local sound = Instance.new("Sound", workspace)
+            sound.SoundId = "rbxassetid://138186576"
+            sound.Volume = 10
+            sound.PlayOnRemove = true
+            sound:Destroy()
+
+            local light = Instance.new("PointLight")
+            light.Brightness = 10
+            light.Range = 15
+            light.Color = Color3.new(1, 0.5, 0)
+            light.Parent = selectedPlayer.Character.HumanoidRootPart
+            task.delay(0.2, function() light:Destroy() end)
+        end
+    end
+})
