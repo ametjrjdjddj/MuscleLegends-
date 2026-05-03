@@ -1,0 +1,463 @@
+loadstring(game:HttpGet("https://raw.githubusercontent.com/ametjrjdjddj/Redz/refs/heads/main/%D9%85%D8%AD%D8%B3%D9%86%D9%87%20%D8%A7%D9%84%D9%81%20(1).txt"))()
+MakeWindow({
+  Hub = {
+    Title = "MuscleLegends | MayUptade",
+    Animation = "by : AmeerDev"
+  },
+  Key = {
+    KeySystem = false,
+    Title = "Key System",
+    Description = "",
+    KeyLink = "",
+    Keys = {"1234"},
+    Notifi = {
+      Notifications = true,
+      CorrectKey = "Running the Script...",
+      Incorrectkey = "The key is incorrect",
+      CopyKeyLink = "Copied to Clipboard"
+    }
+  }
+})
+MinimizeButton({
+  Image = "288650",
+  Size = {40, 40},
+  Color = Color3.fromRGB(10, 10, 10),
+  Corner = true,
+  Stroke = false,
+  StrokeColor = Color3.fromRGB(255, 0, 0)
+})
+local Main = MakeTab({
+    Name = "حقوق المطور",
+    Image = "rbxassetid://75868297719012",
+    TabTitle = false
+})
+AddDiscord(Main, {
+    DiscordLink = "https://t.me/x_e_es",
+    DiscordIcon = "rbxassetid://132236391133374",
+    DiscordTitle = "انضم لقناة السكربت لتعرف كل شي جديد",
+    })
+AddButton(Main, {
+
+  Name = "اضغط لنسخ حسابي تيك",
+
+  Callback = function()
+
+   setclipboard("j_j_8I") 
+
+  end
+
+})
+AddButton(Main, {
+
+  Name = "اضغط لنسخ حسابي تلي",
+
+  Callback = function()
+
+   setclipboard("Gahlc") 
+
+  end
+
+})
+    local Main = MakeTab({
+    Name = "المعلومات",
+    Image = "rbxassetid://124560466474914",
+    TabTitle = false
+})
+  local player = game.Players.LocalPlayer
+local userId = player.UserId
+local thumbType = Enum.ThumbnailType.HeadShot
+local thumbSize = Enum.ThumbnailSize.Size150x150
+local content, isReady = game.Players:GetUserThumbnailAsync(userId, thumbType, thumbSize)
+
+local playerImage = AddImageLabel(Main, {
+    Name = "صورة اللاعب",
+    Image = content
+})
+local Players = game:GetService("Players")
+local MarketplaceService = game:GetService("MarketplaceService")
+local RunService = game:GetService("RunService")
+local LocalPlayer = Players.LocalPlayer
+
+local placeName = "Unknown Place"
+
+pcall(function()
+    local info = MarketplaceService:GetProductInfo(game.PlaceId)
+    placeName = info.Name
+end)
+
+local exploit = "Unknown Exploit"
+if identifyexecutor then
+    exploit = identifyexecutor()
+elseif getexecutorname then
+    exploit = getexecutorname()
+end
+
+local fps = 0
+local frameCount = 0
+local lastTime = tick()
+
+RunService.Heartbeat:Connect(function()
+    frameCount = frameCount + 1
+    local currentTime = tick()
+    if currentTime - lastTime >= 1 then
+        fps = frameCount
+        frameCount = 0
+        lastTime = currentTime
+    end
+end)
+
+local Label = AddTextLabel(Main,
+ "User: " .. LocalPlayer.Name .. "\n" ..
+ "Map Name: " .. placeName .. "\n" ..
+ "Account Age: " .. LocalPlayer.AccountAge .. " days\n" ..
+ "Script: SCN hub \n" ..
+ "Exploit: " .. exploit .. "\n" ..
+ "Ping: " .. math.floor(LocalPlayer:GetNetworkPing() * 1000) .. " ms\n" ..
+ "FPS: " .. fps .. "\n" ..
+ "Time: " .. os.date("%H:%M:%S")
+)
+
+task.spawn(function()
+ while true do
+  task.wait(1)
+  Label.Update(
+   "User: " .. LocalPlayer.Name .. "\n" ..
+   "Map Name: " .. placeName .. "\n" ..
+   "Account Age: " .. LocalPlayer.AccountAge .. " days\n" ..
+   "Script: SCN hub \n" ..
+   "Exploit: " .. exploit .. "\n" ..
+   "Ping: " .. math.floor(LocalPlayer:GetNetworkPing() * 1000) .. " ms\n" ..
+   "FPS: " .. fps .. "\n" ..
+   "Time: " .. os.date("%H:%M:%S")
+  )
+ end
+end)
+local Main = MakeTab({
+    Name = "كل شي يخص الماب",
+    Image = "rbxassetid://82004462003936",
+    TabTitle = false
+})
+local section = AddSection(Main, {"فقط حدد الايتم الي تبي تتمرن فيه وشغل الزر"})
+--[[
+  {"Teste"} <table> nome da janela
+]]
+local autoEquipAndUse = false
+
+local autoClick = false
+
+AddToggle(Main, {
+    Name = "Auto Clicker",
+    Default = false,
+    Callback = function(Value)
+        autoClick = Value
+        
+        task.spawn(function()
+            local VIM = game:GetService("VirtualInputManager")
+            while autoClick do
+                VIM:SendMouseButtonEvent(0, 0, 0, true, game, 0)
+                VIM:SendMouseButtonEvent(0, 0, 0, false, game, 0)
+                
+                task.wait(0.01) 
+            end
+        end)
+    end
+})
+local autoRebirth = false
+
+AddToggle(Main, {
+    Name = "اوتو ريبيرث",
+    Default = false,
+    Callback = function(Value)
+        autoRebirth = Value
+        task.spawn(function()
+            while autoRebirth do
+                pcall(function()
+                    game:GetService("ReplicatedStorage").rEvents.rebirthRemote:InvokeServer("rebirthRequest")
+                end)
+                task.wait(1)
+            end
+        end)
+    end
+})
+local autoJoinBrawl = false
+
+AddToggle(Main, {
+    Name = "اوتو تدخل الحلبة",
+    Default = false,
+    Callback = function(Value)
+        autoJoinBrawl = Value
+        task.spawn(function()
+            while autoJoinBrawl do
+                pcall(function()
+                    game:GetService("ReplicatedStorage").rEvents.brawlEvent:FireServer("joinBrawl")
+                end)
+                task.wait(5)
+            end
+        end)
+    end
+})
+AddToggle(Main, {
+    Name = "اقتل الكل",
+    Default = false,
+    Callback = function(Value)
+        _G.KillAll = Value
+        while _G.KillAll do
+            for _, v in pairs(game.Players:GetPlayers()) do
+                if v ~= game.Players.LocalPlayer and v.Character and v.Character:FindFirstChild("HumanoidRootPart") then
+                    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v.Character.HumanoidRootPart.CFrame * CFrame.new(0, 0, 3)
+                    game:GetService("Players").LocalPlayer.muscleEvent:FireServer("punch")
+                end
+                task.wait(0.1)
+            end
+        end
+    end
+})
+
+local section = AddSection(Main, {"التنقلات"})
+--[[
+  {"Teste"} <table> nome da janela
+]]
+AddButton(Main, {
+    Name = "انتقل منطقة ريبيرث 1",
+    Callback = function()
+        local targetCFrame = CFrame.new(-2835.83374, 0.100018002, -405.530151, 0, 0, -1, 0, 1, 0, 1, 0, 0) -- ضع الإحداثيات هنا
+        local character = game.Players.LocalPlayer.Character
+        if character and character:FindFirstChild("HumanoidRootPart") then
+            character.HumanoidRootPart.CFrame = targetCFrame
+        end
+    end
+})
+AddButton(Main, {
+    Name = "انتقل ل منطقة 5 ريبيرث",
+    Callback = function()
+        local targetCFrame = CFrame.new(2473.052, 0.100018144, 1070.85046, 0, 0, 1, 0, 1, -0, -1, 0, 0) -- ضع الإحداثيات هنا
+        local character = game.Players.LocalPlayer.Character
+        if character and character:FindFirstChild("HumanoidRootPart") then
+            character.HumanoidRootPart.CFrame = targetCFrame
+        end
+    end
+})
+AddButton(Main, {
+    Name = "انتقل لمنطقة 15 ريبيرث",
+    Callback = function()
+        local targetCFrame = CFrame.new(-6981.23877, 0.100018002, -1282.5426, 0, 0, -1, 0, 1, 0, 1, 0, 0)
+        local character = game.Players.LocalPlayer.Character
+        if character and character:FindFirstChild("HumanoidRootPart") then
+            character.HumanoidRootPart.CFrame = targetCFrame
+        end
+    end
+})
+AddButton(Main, {
+    Name = "انتقل لمنطقة 30 ريبيرث",
+    Callback = function()
+        local targetCFrame = CFrame.new(4336.6167, 984.153076, -3854.44995, 8.10623169e-05, -8.10623169e-05, 1, -1, 8.10623169e-05, 8.10623169e-05, -8.10623169e-05, -1, -8.10623169e-05) -- ضع الإحداثيات هنا
+        local character = game.Players.LocalPlayer.Character
+        if character and character:FindFirstChild("HumanoidRootPart") then
+            character.HumanoidRootPart.CFrame = targetCFrame
+        end
+    end
+})
+local section = AddSection(Main, {"البتات"})
+--[[
+  {"Teste"} <table> nome da janela
+]]
+AddButton(Main, {
+    Name = "Buy Blue Crystal",
+    Callback = function()
+        game:GetService("ReplicatedStorage").rEvents.openCrystalRemote:InvokeServer("openCrystal", "Blue Crystal")
+    end
+})
+
+AddButton(Main, {
+    Name = "Buy Frost Crystal",
+    Callback = function()
+        game:GetService("ReplicatedStorage").rEvents.openCrystalRemote:InvokeServer("openCrystal", "Frost Crystal")
+    end
+})
+
+AddButton(Main, {
+    Name = "Buy Galaxy Crystal",
+    Callback = function()
+        game:GetService("ReplicatedStorage").rEvents.openCrystalRemote:InvokeServer("openCrystal", "Galaxy Oracle Crystal")
+    end
+})
+
+AddButton(Main, {
+    Name = "Buy Green Crystal",
+    Callback = function()
+        game:GetService("ReplicatedStorage").rEvents.openCrystalRemote:InvokeServer("openCrystal", "Green Crystal")
+    end
+})
+
+AddButton(Main, {
+    Name = "Buy Inferno Crystal",
+    Callback = function()
+        game:GetService("ReplicatedStorage").rEvents.openCrystalRemote:InvokeServer("openCrystal", "Inferno Crystal")
+    end
+})
+
+AddButton(Main, {
+    Name = "Buy Jungle Crystal",
+    Callback = function()
+        game:GetService("ReplicatedStorage").rEvents.openCrystalRemote:InvokeServer("openCrystal", "Jungle Crystal")
+    end
+})
+
+AddButton(Main, {
+    Name = "Buy Legends Crystal",
+    Callback = function()
+        game:GetService("ReplicatedStorage").rEvents.openCrystalRemote:InvokeServer("openCrystal", "Legends Crystal")
+    end
+})
+
+AddButton(Main, {
+    Name = "Buy Muscle Elite Crystal",
+    Callback = function()
+        game:GetService("ReplicatedStorage").rEvents.openCrystalRemote:InvokeServer("openCrystal", "Muscle Elite Crystal")
+    end
+})
+
+AddButton(Main, {
+    Name = "Buy Mythical Crystal",
+    Callback = function()
+        game:GetService("ReplicatedStorage").rEvents.openCrystalRemote:InvokeServer("openCrystal", "Mythical Crystal")
+    end
+})
+local Main = MakeTab({
+    Name = "اللاعب",
+    Image = "rbxassetid://82004462003936",
+    TabTitle = false
+})
+AddButton(Main, {
+  Name = "اداة تنقل وين متريد توديك",
+  Callback = function()
+    local player = game.Players.LocalPlayer
+    local mouse = player:GetMouse()
+
+    local function createTeleportTool()
+        local tool = Instance.new("Tool")
+        tool.RequiresHandle = false
+        tool.Name = "تنقل المطور امير"
+
+        tool.Activated:Connect(function()
+            local hitPos = mouse.Hit.p + Vector3.new(0, 2.5, 0)
+            local pos = CFrame.new(hitPos)
+            player.Character.HumanoidRootPart.CFrame = pos
+        end)
+
+        tool.Parent = player.Backpack
+    end
+
+    -- Cria a ferramenta inicialmente
+    createTeleportTool()
+
+    -- Adiciona a ferramenta novamente quando o personagem é reaparecido
+    player.CharacterAdded:Connect(function()
+        wait(0.1) -- Espera um curto período de tempo para garantir que o inventário seja carregado
+        createTeleportTool()
+    end)
+  end
+})
+AddTextBox(Main, {
+  Name = "سرعة ",
+  Default = "",
+  PlaceholderText = "ادخل رقم",
+  ClearText = true,
+  Callback = function(value)
+game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = value     
+ end
+})
+AddTextBox(Main, {
+  Name = "قفز ",
+  Default = "",
+  PlaceholderText = "ادخل رقم",
+  ClearText = true,
+  Callback = function(value)
+game.Players.LocalPlayer.Character.Humanoid.JumpPower = value    
+  end
+})
+AddTextBox(Main, {
+  Name = "شاشه",
+  Default = "",
+  PlaceholderText = "ادخل رقم",
+  ClearText = true,
+  Callback = function(value)
+local FovNumber = value
+local Camera = workspace.CurrentCamera
+Camera.FieldOfView = FovNumber  
+  end
+})
+AddTextBox(Main, {
+  Name = "دوران",
+  Default = "",
+  PlaceholderText = "ادخل رقم",
+  ClearText = true,
+  Callback = function(Value)
+    getgenv().Spinspeed = Value
+
+local Spin = Instance.new'BodyAngularVelocity'
+Spin.Parent = game:GetService'Players'.LocalPlayer.Character:FindFirstChild'HumanoidRootPart'
+Spin.MaxTorque = Vector3.new(0, math.huge, 100)
+wait(0.1)
+Spin.AngularVelocity = Vector3.new(100,Spinspeed,0)
+  end
+})
+AddButton(Main, {
+  Name = " اعادة دخول الى سيرفر",
+  Callback = function()
+    local ts = game:GetService("TeleportService")
+				local p = game:GetService("Players").LocalPlayer
+				ts:Teleport(game.PlaceId, p)
+    print('Hello!')
+  end
+})
+AddButton(Main, {
+  Name = "احذف جميع الأشياء الي في ايدك",
+  Callback = function()
+    local args = {
+    [1] = "ClearAllTools"
+}
+
+game:GetService("ReplicatedStorage").RE:FindFirstChild("1Clea1rTool1s"):FireServer(unpack(args))
+  end
+})
+AddButton(Main, {
+  Name = "اقتل نفسك",
+  Callback = function()
+    game.Players.LocalPlayer.Character.Humanoid.Health = 0
+  end
+})
+AddButton(Main, {
+  Name = "ازالة لاق",
+  Callback = function()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/CasperFlyModz/discord.gg-rips/main/FPSBooster.lua"))()
+  end
+})
+AddButton(Main, {
+    Name = "ادخل سيرفر خاص",
+    Callback = function()
+        local HttpService = game:GetService("HttpService")
+        local TeleportService = game:GetService("TeleportService")
+        local PlaceId = game.PlaceId
+        
+        local servers = HttpService:JSONDecode(game:HttpGet("https://games.roblox.com/v1/games/"..PlaceId.."/servers/Public?sortOrder=Asc&limit=100"))
+        
+        for _, server in pairs(servers.data) do
+            if server.playing < server.maxPlayers and server.id ~= game.JobId then
+                TeleportService:TeleportToPlaceInstance(PlaceId, server.id)
+                break
+            end
+        end
+    end
+})
+AddButton(Main, {
+    Name = "اختفاء",
+    Callback = function()
+        local char = game.Players.LocalPlayer.Character
+        for _, v in pairs(char:GetDescendants()) do
+            if v:IsA("BasePart") or v:IsA("Decal") then
+                v.Transparency = 1
+            end
+        end
+    end
+})
